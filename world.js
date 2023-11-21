@@ -23,4 +23,19 @@ window.onload = function() {
         // Send the request
         xhr.send();
     });
+
+    // Event listener for "Lookup Cities" button
+    document.getElementById("lookup_cities").addEventListener("click", function() {
+        var countryName = document.getElementById("country").value;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'world.php?country=' + encodeURIComponent(countryName) + '&context=cities', true);
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                document.getElementById("result").innerHTML = xhr.responseText;
+            } else {
+                console.error('Request failed. Returned status of ' + xhr.status);
+            }
+        };
+        xhr.send();
+    });
 };
